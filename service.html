@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>แบบฟอร์มขอใช้บริการ | บริษัท เอสพี เอ็ดดูเคชั่น เซ็นเตอร์ จำกัด</title>
+  <link rel="stylesheet" href="service.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- แถบผู้ใช้ -->
+<div id="user-info">
+  <span id="user-email">กำลังโหลด...</span>
+  <button id="logoutBtn">ออกจากระบบ</button>
+</div>
+
+<div class="container">
+  <div class="logo-wrapper">
+    <img src="logo.png" alt="โลโก้บริษัท">
+  </div>
+
+  <h1>แบบฟอร์มขอใช้บริการ</h1>
+  <h2>บริษัท เอสพี เอ็ดดูเคชั่น เซ็นเตอร์ จำกัด</h2>
+
+  <form id="serviceForm">
+
+    <label class="required">เลือกประเภทบริการ</label>
+    <select id="serviceType" required>
+      <option value="">-- กรุณาเลือกประเภทบริการ --</option>
+      <option>สั่งซื้อ / สั่งทำเครื่องเล่นสนาม</option>
+      <option>ซ่อม / พ่นสีเครื่องเล่นสนาม</option>
+    </select>
+
+    <label>ชื่อ – นามสกุล</label>
+    <input type="text" id="fullname">
+
+    <label>เบอร์โทรศัพท์</label>
+    <input type="tel" id="phone">
+
+    <label class="required">LINE ID</label>
+    <input type="text" id="lineId" required>
+
+    <label>ลิงก์แผนที่ Google Map</label>
+    <input type="url" id="mapLink">
+
+    <label>รายละเอียดเพิ่มเติม / ที่อยู่หน้างาน</label>
+    <textarea id="detail"></textarea>
+
+    <div class="checkbox-group">
+      <label>
+        <input type="checkbox" required>
+        บริษัทจะเก็บและใช้ข้อมูลเพื่อการติดต่อและให้บริการเท่านั้น
+      </label>
+    </div>
+
+    <div class="notice">
+      📌 หลังส่งข้อมูล บริษัทจะประเมินราคาและติดต่อกลับทาง LINE หรือโทรศัพท์
+    </div>
+
+    <div class="buttons">
+      <button type="submit" class="submit-btn">ส่งข้อมูล</button>
+      <button type="reset" class="reset-btn">ล้างข้อมูล</button>
+      <button type="button" class="home-btn" onclick="location.href='index.html'">
+        กลับหน้าแรก
+      </button>
+    </div>
+  </form>
+</div>
+
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCMPuEHLJcg7XFIAFX4wOjFpWz78rwA00M",
+    authDomain: "spde-dee61.firebaseapp.com",
+    projectId: "spde-dee61",
+    storageBucket: "spde-dee61.firebasestorage.app",
+    messagingSenderId: "609594112455",
+    appId: "1:609594112455:web:0083c5b69d93f0f3e381e2"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const emailEl = document.getElementById("user-email");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const form = document.getElementById("serviceForm");
+
+  let currentUser = null;
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      currentUser = user;
+      emailEl.textContent = `👤 ${user.email}`;
+    } else {
+      window.location.href = "login.html";
+    }
+  });
+
+  logoutBtn.onclick = async () => {
+    if (!confirm("ต้องการออกจากระบบหรือไม่?")) return;
+    await signOut(auth);
+    window.location.href = "login.html";
+  };
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    try {
+      await addDoc(collection(db, "service_requests"), {
+        uid: currentUser.uid,
+        email: currentUser.email,
+        serviceType: serviceType.value,
+        fullname: fullname.value,
+        phone: phone.value,
+        lineId: lineId.value,
+        mapLink: mapLink.value,
+        detail: detail.value,
+        status: "pending",
+        createdAt: serverTimestamp()
+      });
+
+      alert("✅ ส่งข้อมูลเรียบร้อย บริษัทจะติดต่อกลับโดยเร็ว");
+      form.reset();
+
+    } catch (err) {
+      console.error(err);
+      alert("❌ เกิดข้อผิดพลาด กรุณาลองใหม่");
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>เช็คสถานะคำสั่งซื้อ | บริษัท เอสพี เอ็ดดูเคชั่น เซ็นเตอร์ จำกัด</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="order-status.css">
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🔎 เช็คสถานะคำสั่งซื้อ</h1>
+  <div class="subtitle">กรอกอีเมลที่ใช้ส่งแบบฟอร์ม เพื่อดูสถานะงาน</div>
+
+  <div class="search-box">
+    <input type="email" id="emailInput" placeholder="กรุณากรอกอีเมลของท่าน">
+    <button id="searchBtn">ค้นหา</button>
+  </div>
+
+  <div id="result"></div>
+
+  <a href="index.html" class="back-btn">← กลับหน้าแรก</a>
+</div>
+
+<!-- Firebase -->
+
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    getDocs
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCMPuEHLJcg7XFIAFX4wOjFpWz78rwA00M",
+    authDomain: "spde-dee61.firebaseapp.com",
+    projectId: "spde-dee61",
+    storageBucket: "spde-dee61.firebasestorage.app",
+    messagingSenderId: "609594112455",
+    appId: "1:609594112455:web:0083c5b69d93f0f3e381e2"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const searchBtn = document.getElementById("searchBtn");
+  const emailInput = document.getElementById("emailInput");
+  const resultEl = document.getElementById("result");
+
+  searchBtn.onclick = async () => {
+    const email = emailInput.value.trim();
+    resultEl.innerHTML = "";
+
+    if (!email) {
+      alert("กรุณากรอกอีเมล");
+      return;
+    }
+
+    const q = query(
+      collection(db, "service_requests"),
+      where("email", "==", email)
+    );
+
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+      resultEl.innerHTML = `<div class="empty">❌ ไม่พบข้อมูลคำสั่งซื้อ</div>`;
+      return;
+    }
+
+    snap.forEach(doc => {
+      const d = doc.data();
+
+      const statusText = {
+        pending: "สถานะ : รอดำเนินการ เจ้าหน้าที่กำลังประเมินราคา และจะติดต่อกลับเพื่อแจ้งรายละเอียด พร้อมนัดหมายวันเข้าหน้างานโดยเร็วที่สุด",
+        working: "กำลังดำเนินงาน",
+        done: "ดำเนินการเสร็จสิ้น",
+      };
+
+      resultEl.innerHTML += `
+        <div class="order-card">
+          <h3>📄 รายละเอียดคำสั่งซื้อ</h3>
+
+          <div class="row"><div class="label">ชื่อ</div><div>${d.fullName || "-"}</div></div>
+          <div class="row"><div class="label">บริการ</div><div>${d.serviceType || "-"}</div></div>
+          <div class="row"><div class="label">เบอร์โทร</div><div>${d.phone || "-"}</div></div>
+          <div class="row"><div class="label">LINE ID</div><div>${d.lineId || "-"}</div></div>
+          <div class="row"><div class="label">รายละเอียด</div><div>${d.detail || "-"}</div></div>
+          <div class="row">
+            <div class="label">สถานะ</div>
+            <div>
+              <span class="status ${d.status}">
+                ${statusText[d.status] || "สถานะ : รอดำเนินการ เจ้าหน้าที่กำลังประเมินราคา และจะติดต่อกลับเพื่อแจ้งรายละเอียด พร้อมนัดหมายวันเข้าหน้างานโดยเร็วที่สุด"}
+              </span>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  };
+</script>
+
+</body>
+</html>

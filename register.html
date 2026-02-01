@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>สมัครสมาชิก | บริษัท เอสพี เอ็ดดูเคชั่น เซ็นเตอร์ จำกัด</title>
+   <link rel="stylesheet" href="register.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+
+  <div class="register-box">
+
+    <img src="logo.jpg" alt="โลโก้บริษัท" class="logo">
+
+    <h2>สมัครสมาชิก</h2>
+    <div class="subtitle">
+      สมัครเพื่อขอใช้บริการกับ<br>
+      บริษัท เอสพี เอ็ดดูเคชั่น เซ็นเตอร์ จำกัด
+    </div>
+
+    <form id="registerForm">
+
+      <div class="form-group">
+        <label>อีเมล</label>
+        <input type="email" id="email" required />
+      </div>
+
+      <div class="form-group">
+        <label>รหัสผ่าน</label>
+        <input type="password" id="password" required />
+      </div>
+
+      <button type="submit">สมัครสมาชิก</button>
+
+      <p id="errorMsg"></p>
+      <p id="successMsg"></p>
+
+    </form>
+
+    <div class="footer-text">
+      มีบัญชีอยู่แล้ว?
+      <a href="login.html">เข้าสู่ระบบ</a>
+    </div>
+
+    <div class="note">
+      ระบบนี้ใช้สำหรับลูกค้าที่ต้องการขอใช้บริการ<br>
+      ข้อมูลของท่านจะถูกเก็บเป็นความลับ
+    </div>
+<br>
+<a href="index.html" class="home-back2-btn">
+  <i class="fa-solid fa-house"></i>
+  กลับหน้าหลัก
+</a>
+  </div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCMPuEHLJcg7XFIAFX4wOjFpWz78rwA00M",
+    authDomain: "spde-dee61.firebaseapp.com",
+    projectId: "spde-dee61",
+    storageBucket: "spde-dee61.firebasestorage.app",
+    messagingSenderId: "609594112455",
+    appId: "1:609594112455:web:0083c5b69d93f0f3e381e2"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const form = document.getElementById('registerForm');
+  const errorMsg = document.getElementById('errorMsg');
+  const successMsg = document.getElementById('successMsg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    errorMsg.style.display = 'none';
+    successMsg.style.display = 'none';
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, 'customers', user.uid), {
+        email: email,
+        createdAt: new Date()
+      });
+
+      successMsg.textContent = 'สมัครสมาชิกสำเร็จ กำลังพาไปหน้าเข้าสู่ระบบ...';
+      successMsg.style.display = 'block';
+
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 1500);
+
+    } catch (error) {
+      errorMsg.textContent = 'เกิดข้อผิดพลาด: ' + error.message;
+      errorMsg.style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>

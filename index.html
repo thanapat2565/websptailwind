@@ -1,0 +1,394 @@
+<!DOCTYPE html>   
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>บริษัท เอสพี เอ็ดดูเคชั่น เซ็นเตอร์ จำกัด</title>
+  <link rel="icon" type="image/png" href="logo.jpg">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+   <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+<!--  User Bar  -->
+<div class="user-status-bar fixed top-0 inset-x-0 z-50 
+            flex items-center justify-end gap-3 
+            bg-gradient-to-r from-orange-500 to-orange-400
+            text-white px-5 py-2 text-sm shadow">
+
+
+  <div class="status">
+    <i class="fa-solid fa-circle-user"></i>
+    <span id="loginStatus">ยังไม่ได้เข้าสู่ระบบ</span>
+    <span id="userEmail" class="email"></span>
+  </div>
+
+  <a href="login.html" id="loginBtn">
+    <i class="fa-solid fa-right-to-bracket"></i> เข้าสู่ระบบ
+  </a>
+
+  <a href="register.html" id="registerBtn">
+    <i class="fa-solid fa-user-plus"></i> สมัครสมาชิก
+  </a>
+
+  <button id="logoutBtn" style="display:none;">
+    <i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ
+  </button>
+</div>
+
+<!--  Header  -->
+
+<header class="hero hero-image-only"></header>
+
+<!--  ปุ่ม Service ใช้ tailwind สีกับเด้งๆ -->
+
+<section class="container">
+<div class="hero-cta">
+
+
+  <a class="inline-flex items-center justify-center
+          px-16 py-6 rounded-full
+          text-xl font-bold
+          bg-gradient-to-r from-yellow-400 to-orange-400
+          shadow-xl hover:shadow-2xl
+          transition-all duration-300
+          
+           cta-btn 
+   transition transform duration-300
+   hover:scale-105 hover:shadow-2xl
+   active:scale-95" 
+          
+          href="https://cdn3.me-qr.com/pdf/182ea730-2f6e-46c3-a67b-87265e64631c.pdf" class="cta-btn">เครื่องเล่น ชุดบ้าน Happy Land</a>
+  
+
+    <a class="inline-flex items-center justify-center
+          px-16 py-6 rounded-full
+          text-xl font-bold
+          bg-gradient-to-r from-yellow-400 to-orange-400
+          shadow-xl hover:shadow-2xl
+          transition-all duration-300
+          
+           cta-btn 
+   transition transform duration-300
+   hover:scale-105 hover:shadow-2xl
+   active:scale-95" 
+   
+          href="#" id="serviceBtn" class="cta-btn">ใช้บริการเรา</a>
+
+  <a class="inline-flex items-center justify-center
+          px-16 py-6 rounded-full
+          text-xl font-bold
+          bg-gradient-to-r from-yellow-400 to-orange-400
+          shadow-xl hover:shadow-2xl
+          transition-all duration-300
+          
+           cta-btn 
+   transition transform duration-300
+   hover:scale-105 hover:shadow-2xl
+   active:scale-95" 
+   
+          href="https://cdn3.me-qr.com/pdf/45dcdd4f-659d-4cc9-8141-8b972cd5f481.pdf" class="cta-btn">Catalog เครื่องเล่นสนาม</a>
+  
+    <a class="inline-flex items-center justify-center
+          px-16 py-6 rounded-full
+          text-xl font-bold
+          bg-gradient-to-r from-yellow-400 to-orange-400
+          shadow-xl hover:shadow-2xl
+          transition-all duration-300
+          
+           cta-btn 
+   transition transform duration-300
+   hover:scale-105 hover:shadow-2xl
+   active:scale-95" 
+   
+        href="order-status.html" class="cta-btn">เช็คสถานะคำสั่งซื้อ</a>
+</div>
+
+<div class="services">
+
+    <div class="service-card">
+      <div class="slider">
+        <img src="p.jpg" class="active" alt="ซ่อมเครื่องเล่นสนาม">
+        <img src="p2.jpg">
+        <img src="p3.jpg">
+        <button class="prev">‹</button>
+        <button class="next">›</button>
+      </div>
+      <h3 class="text-3xl font-bold 
+           text-gray-800 
+           relative inline-block
+           after:content-['']
+           after:block after:h-1 after:w-20
+            after:mx-auto after:mt-3">สั่งทำเครื่องเล่นสนาม ตามแคตตาลอค</h3>
+      <p>แก้ไขจุดชำรุด เสริมความแข็งแรง พร้อมใช้งานอย่างปลอดภัย</p>
+    </div>
+
+    <div class="service-card">
+      <div class="slider">
+        <img src="Co2.jpg" class="active">
+        <img src="Co.jpg">
+        <img src="Co3.jpg">
+        <button class="prev">‹</button>
+        <button class="next">›</button>
+      </div>
+      <h3 class="text-3xl font-bold 
+           text-gray-800 
+           relative inline-block
+           after:content-['']
+           after:block after:h-1 after:w-20
+            after:mx-auto after:mt-3">พ่นสี / ปรับปรุงใหม่</h3>
+      <p>พ่นสีใหม่ เพิ่มความสวยงาม ใช้สีปลอดภัยสำหรับเด็ก</p>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!--  Why  -->
+<section class="container">
+  <div class="section-title">
+    <h2 class="container">
+  <div class="section-title">
+    <h2 class="text-3xl font-bold 
+           text-gray-800 
+           relative inline-block
+           after:content-['']
+           after:block after:h-1 after:w-20
+            after:mx-auto after:mt-3">ทำไมต้องเลือกเรา?</h2>
+  </div>
+
+  <div class="trust">
+
+    <div class="trust-item">
+      <div class="slider slider-large">
+        <img src="deli/d1.jpg" class="active">
+        <img src="deli/d2.jpg">
+        <img src="deli/d3.jpg">
+        <button class="prev">‹</button>
+        <button class="next">›</button>
+      </div>
+      <h3>บริการทั่วประเทศ</h3>
+      <p>รับงานทั้งในกรุงเทพและต่างจังหวัด</p>
+    </div>
+
+    <div class="trust-item">
+      <div class="slider slider-large">
+        <img src="mec/En3.png" class="active">
+        <img src="mec/En2.png">
+        <img src="mec/En4.png">
+        <img src="mec/En5.png">
+        <img src="mec/En6.png">
+        <img src="mec/En7.png">
+        <img src="mec/En8.png">
+        <img src="mec/En9.png">
+        <img src="mec/En10.png">
+        <img src="mec/En11.png">
+        <img src="mec/En12.png">
+        <img src="mec/En13.png">
+        <button class="prev">‹</button>
+        <button class="next">›</button>
+      </div>
+      <h3 >ทีมช่างมีประสบการณ์</h3>
+      <p>เชี่ยวชาญด้านเครื่องเล่นสนามโดยเฉพาะ</p>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="container">
+  <div class="section-title">
+    <h2 class="text-3xl font-bold 
+           text-gray-800 
+           relative inline-block
+           after:content-['']
+           after:block after:h-1 after:w-20
+            after:mx-auto after:mt-3">ผลงานการส่งมอบงาน</h2>
+    <p>ส่งมอบงานทั่วประเทศ</p>
+  </div>
+
+
+
+  <div class="portfolio-slider">
+    <div class="slider slider-portfolio">
+      <img src="p/p1.jpg" class="active">
+      <img src="p/p3.png">
+      <img src="p/p4.png">
+      <img src="p/p5.png">
+      <img src="p/p6.png">
+      <img src="p/p7.png">
+      <img src="p/p8.png">
+      <button class="prev">‹</button>
+      <button class="next">›</button>
+    </div>
+  </div>
+</section>
+
+
+<footer class="
+  bg-white/90 backdrop-blur
+  border-t
+  shadow-inner
+  mt-16
+">
+  <div class="
+    max-w-7xl mx-auto
+    px-4 py-8
+    text-center
+    space-y-4
+  ">
+
+    
+    <div class="flex justify-center">
+      <img src="logo.jpg"
+           alt="SP Education Center"
+           class="w-16 h-16 rounded-full shadow-md border bg-white p-1">
+    </div>
+
+    
+    <p class="text-lg font-semibold text-gray-800">
+      บริษัท เอสพี เอ็ดดูเคชั่น เซ็นเตอร์ จำกัด
+    </p>
+
+  
+    <p class="text-sm text-gray-600 leading-relaxed">
+      โทรศัพท์: 062-198-3944 , 089-622-4849
+      <br class="md:hidden">
+      <span class="hidden md:inline">|</span>
+      LINE & Facebook : บริษัท เอสพี เอ็ดดูเคชั่น เซ็นเตอร์ จำกัด
+    </p>
+
+
+    <div class="
+      flex flex-col sm:flex-row
+      justify-center items-center
+      gap-3
+      pt-2
+    ">
+      <a href="https://line.me/ti/p/ev1XOicM_6#~"
+         class="
+           flex items-center gap-2
+           px-5 py-2 rounded-full
+           bg-green-500 text-white
+           hover:bg-green-600
+           transition
+           shadow
+         ">
+        <i class="fa-brands fa-line text-lg"></i>
+        <span>แอดไลน์</span>
+      </a>
+
+      <a href="https://www.facebook.com/profile.php?id=100064197061914"
+         class="
+           flex items-center gap-2
+           px-5 py-2 rounded-full
+           bg-blue-800 text-white
+           hover:bg-blue-900
+           transition
+           shadow
+         ">
+        <i class="fa-brands fa-facebook-f text-lg"></i>
+        <span>Facebook</span>
+      </a>
+    </div>
+
+  
+    <p class="text-xs text-gray-500 pt-4">
+      © SP Education Center Co., Ltd.
+    </p>
+  </div>
+</footer>
+
+
+
+<!--  เลื่อนรูป  -->
+
+<script>
+  document.querySelectorAll('.slider').forEach(slider => {
+    let index = 0;
+    const images = slider.querySelectorAll('img');
+    const next = slider.querySelector('.next');
+    const prev = slider.querySelector('.prev');
+
+    if(next && prev){
+      next.onclick = () => {
+        images[index].classList.remove('active');
+        index = (index + 1) % images.length;
+        images[index].classList.add('active');
+      };
+
+      prev.onclick = () => {
+        images[index].classList.remove('active');
+        index = (index - 1 + images.length) % images.length;
+        images[index].classList.add('active');
+      };
+    }
+  });
+</script>
+
+<!-- Firebase Auth -->
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCMPuEHLJcg7XFIAFX4wOjFpWz78rwA00M",
+    authDomain: "spde-dee61.firebaseapp.com",
+    projectId: "spde-dee61",
+    storageBucket: "spde-dee61.firebasestorage.app",
+    messagingSenderId: "609594112455",
+    appId: "1:609594112455:web:0083c5b69d93f0f3e381e2"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const loginStatus = document.getElementById('loginStatus');
+  const userEmail = document.getElementById('userEmail');
+  const loginBtn = document.getElementById('loginBtn');
+  const registerBtn = document.getElementById('registerBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const serviceBtn = document.getElementById('serviceBtn');
+
+  let currentUser = null;
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      currentUser = user;
+      loginStatus.textContent = 'เข้าสู่ระบบแล้ว';
+      userEmail.textContent = `(${user.email})`;
+      loginBtn.style.display = 'none';
+      registerBtn.style.display = 'none';
+      logoutBtn.style.display = 'flex';
+    } else {
+      currentUser = null;
+      loginStatus.textContent = 'ยังไม่ได้เข้าสู่ระบบ';
+      userEmail.textContent = '';
+      loginBtn.style.display = 'flex';
+      registerBtn.style.display = 'flex';
+      logoutBtn.style.display = 'none';
+    }
+  });
+
+  serviceBtn.onclick = () => {
+    if (currentUser) {
+      window.location.href = 'service.html';
+    } else {
+      window.location.href = 'login.html';
+    }
+  };
+
+  logoutBtn.onclick = async () => {
+    await signOut(auth);
+    location.reload();
+  };
+</script>
+
+
+</body>
+</html>
+

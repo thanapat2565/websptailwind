@@ -1,0 +1,126 @@
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #e6ecf3);
+            margin: 0;
+            padding: 0;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-wrapper img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #1f3c88;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: #fff;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1f3c88;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: block;
+            color: #333;
+        }
+
+        .required::after {
+            content: " *";
+            color: red;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="url"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            background: #f9fafc;
+            border: 1px solid #e0e6ef;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .notice {
+            background: #eef5ff;
+            border-left: 5px solid #1f3c88;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            font-size: 15px;
+            color: #1f3c88;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 14px 30px;
+            border-radius: 30px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background: #1f3c88;
+            color: #fff;
+        }
+
+        .reset-btn {
+            background: #ccc;
+        }
+
+        .home-btn {
+            background: transparent;
+            border: 2px solid #1f3c88;
+            color: #1f3c88;
+        }
